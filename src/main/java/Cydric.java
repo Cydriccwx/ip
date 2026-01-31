@@ -20,13 +20,13 @@ class Cydric {
             printLine();
 
             if (input.equals("bye")) {
-                System.out.println("Bye. Hope to see you again soon!");
+                System.out.println(" Bye. Hope to see you again soon!");
                 printLine();
                 break;
             } else if (input.equals("list")) {
-                System.out.println("Here are the tasks in your list:");
+                System.out.println(" Here are the tasks in your list:");
                 for (int i = 0; i < taskCount; i++) {
-                    System.out.println(" " + (i + 1) + "[ ]" + ". " + tasks[i]);
+                    System.out.println(" " + (i + 1) + ". " + tasks[i]);
                 }
             } else if (input.startsWith("mark")) {
                 String[] parts = input.split(" "); // Split "mark number" into "mark" and "number"
@@ -35,7 +35,7 @@ class Cydric {
                 tasks[index].markAsDone();
 
                 System.out.println(" Nice! I've marked this task as done:");
-                System.out.println("  " + tasks[index].toString());
+                System.out.println("   " + tasks[index].toString());
             } else if (input.startsWith("unmark")) {
                 String[] parts = input.split(" ");
                 int index = Integer.parseInt(parts[1]) - 1;
@@ -43,12 +43,12 @@ class Cydric {
                 tasks[index].markAsNotDone();
 
                 System.out.println(" OK, I've marked this task as not done yet:");
-                System.out.println("  " + tasks[index].toString());
+                System.out.println("   " + tasks[index].toString());
             } else {
                 // Add the input to our list
                 tasks[taskCount] = new Task(input);
                 taskCount++;
-                System.out.println("added: " + input);
+                System.out.println(" added: " + input);
             }
             printLine();
         }
