@@ -8,7 +8,7 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "X" : " "); // Mark done task with X
+        return (isDone ? "✅" : " "); // Mark done task with X
     }
 
     public void markAsDone() {
