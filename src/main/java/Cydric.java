@@ -9,7 +9,10 @@ class Cydric {
 
     public static void main(String[] args) {
         printIntroduction();
+        commandHandler();
+    }
 
+    public static void commandHandler() {
         Scanner in = new Scanner(System.in);
 
         while (true) {
