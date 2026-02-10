@@ -106,7 +106,7 @@ class Cydric {
         }
         try {
             int index = Integer.parseInt(parts[1]) - 1;
-            if (index < 0 || index >= taskCount) {
+            if (index < 0 || index >= taskCount) { // task number out of range
                 throw new CydricException("Error: Task number " + parts[1] + " does not exist.");
             }
             tasks[index].markAsDone();
