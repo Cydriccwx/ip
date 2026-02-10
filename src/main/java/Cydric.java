@@ -101,7 +101,7 @@ class Cydric {
 
     // Helper method to handle mark
     private static void handleMark(String[] parts) throws CydricException {
-        if (parts.length < 2) {
+        if (parts.length < 2) { // did not enter task number
             throw new CydricException("Please specify which task you want me to mark!");
         }
         try {
