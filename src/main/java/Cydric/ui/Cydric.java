@@ -1,12 +1,18 @@
+package Cydric.ui;
+
+import Cydric.tasks.Deadline;
+import Cydric.tasks.Event;
+import Cydric.tasks.Task;
+import Cydric.tasks.Todo;
+
 import java.util.Scanner;
-import java.util.Arrays;
 
 class Cydric {
 
     private static final int MAX_TASKS = 100;
     private static Task[] tasks = new Task[MAX_TASKS]; // List of max 100 tasks
     private static int taskCount = 0; // Counter to track how many tasks we have
-    private static int fromCommandLength = 6 // Number to offset /from command for substring
+    private static int fromCommandLength = 6; // Number to offset /from command for substring
     private static int toCommandLength = 4; // Number to offset /to command for substring
     private static int minNumberOfComponents = 2; // Minimum number of components to execute commands
 
@@ -79,8 +85,8 @@ class Cydric {
     // Helper method to print introduction
     public static void printIntroduction() {
         printLine();
-        System.out.println("Hello! I'm the Cydric Bot");
-        System.out.println("To use the Cydric Bot, please key in commands: list/todo/deadline/event/mark/unmark");
+        System.out.println("Hello! I'm the Cydric.UI.Cydric Bot");
+        System.out.println("To use the Cydric.UI.Cydric Bot, please key in commands: list/todo/deadline/event/mark/unmark");
         System.out.println("eg. todo CS2113 Lecture\neg. deadline CS2113 Lecture /by Friday\neg. event CS2113 IP" +
                 " /from week 2 /to week 7");
         System.out.println("To use mark and unmark commands simply type out the command 'list' to view all active " +
@@ -110,7 +116,7 @@ class Cydric {
         try {
             int index = Integer.parseInt(parts[1]) - 1;
             if (index < 0 || index >= taskCount) { // task number out of range
-                throw new CydricException("Error: Task number " + parts[1] + " does not exist.");
+                throw new CydricException("Error: Cydric.UI.Cydric.tasks.Task number " + parts[1] + " does not exist.");
             }
             tasks[index].markAsDone();
             System.out.println("Nice! I've marked this task as done:");
@@ -128,7 +134,7 @@ class Cydric {
         try {
             int index = Integer.parseInt(parts[1]) - 1;
             if (index < 0 || index >= taskCount) {
-                throw new CydricException("Error: Task number " + parts[1] + " does not exist.");
+                throw new CydricException("Error: Cydric.UI.Cydric.tasks.Task number " + parts[1] + " does not exist.");
             }
             tasks[index].markAsNotDone();
             System.out.println("Alright! I've marked this task as not done yet:");
@@ -172,7 +178,7 @@ class Cydric {
         String endDate = description.substring(toIndex + toCommandLength).trim();
 
         if (taskDescription.isEmpty() || startDate.isEmpty() || endDate.isEmpty()) {
-            throw new CydricException("Event descriptions cannot be empty!");
+            throw new CydricException("Cydric.UI.Cydric.tasks.Event descriptions cannot be empty!");
         }
         addTask(new Event(taskDescription, startDate, endDate));
     }
