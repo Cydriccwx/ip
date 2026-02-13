@@ -1,4 +1,6 @@
-package Cydric.tasks;
+package Cydric.commands;
+
+import Cydric.tasks.Task;
 
 public class Todo extends Task {
     protected boolean isDone;

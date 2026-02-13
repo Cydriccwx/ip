@@ -1,9 +1,9 @@
 package Cydric.ui;
 
-import Cydric.tasks.Deadline;
-import Cydric.tasks.Event;
+import Cydric.commands.Deadline;
+import Cydric.commands.Event;
 import Cydric.tasks.Task;
-import Cydric.tasks.Todo;
+import Cydric.commands.Todo;
 
 import java.util.Scanner;
 
@@ -178,7 +178,7 @@ class Cydric {
         String endDate = description.substring(toIndex + toCommandLength).trim();
 
         if (taskDescription.isEmpty() || startDate.isEmpty() || endDate.isEmpty()) {
-            throw new CydricException("Cydric.UI.Cydric.tasks.Event descriptions cannot be empty!");
+            throw new CydricException("Cydric.UI.Cydric.commands.Event descriptions cannot be empty!");
         }
         addTask(new Event(taskDescription, startDate, endDate));
     }
