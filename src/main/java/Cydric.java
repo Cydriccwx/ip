@@ -6,6 +6,9 @@ class Cydric {
     private static final int MAX_TASKS = 100;
     private static Task[] tasks = new Task[MAX_TASKS]; // List of max 100 tasks
     private static int taskCount = 0; // Counter to track how many tasks we have
+    private static int fromCommandLength = 6 // Number to offset /from command for substring
+    private static int toCommandLength = 4; // Number to offset /to command for substring
+    private static int minNumberOfComponents = 2; // Minimum number of components to execute commands
 
     public static void main(String[] args) {
         printIntroduction();
@@ -46,7 +49,7 @@ class Cydric {
                     break;
 
                 case "todo":
-                    if (separateParts.length < 2  || separateParts[1].trim().isEmpty()) {
+                    if (separateParts.length < minNumberOfComponents  || separateParts[1].trim().isEmpty()) {
                         throw new CydricException("Please enter a description of your todo!");
                     }
                     addTask(new Todo(separateParts[1].trim()));
@@ -91,17 +94,17 @@ class Cydric {
     }
 
     // Helper method to print addition of tasks
-    private static void addTask(Task t) {
-        tasks[taskCount] = t;
+    private static void addTask(Task taskInput) {
+        tasks[taskCount] = taskInput;
         taskCount++;
         System.out.println("Got it. I've added this task:");
-        System.out.println("  " + t);
+        System.out.println("  " + taskInput);
         System.out.println("Now you have " + taskCount + " tasks in the list.");
     }
 
     // Helper method to handle mark
     private static void handleMark(String[] parts) throws CydricException {
-        if (parts.length < 2) { // did not enter task number
+        if (parts.length < minNumberOfComponents) { // did not enter task number
             throw new CydricException("Please specify which task you want me to mark!");
         }
         try {
@@ -119,7 +122,7 @@ class Cydric {
 
     // Helper method to handle unmark
     private static void handleUnmark(String[] parts) throws CydricException {
-        if (parts.length < 2) {
+        if (parts.length < minNumberOfComponents) {
             throw new CydricException("Please specify which task you want me to unmark!");
         }
         try {
@@ -137,13 +140,13 @@ class Cydric {
 
     // Helper method to handle deadline
     private static void handleDeadline(String[] parts) throws CydricException {
-        if (parts.length < 2 || parts[1].trim().isEmpty()) {
+        if (parts.length < minNumberOfComponents || parts[1].trim().isEmpty()) {
             throw new CydricException("The description of a deadline cannot be empty!");
         }
 
         String[] descriptionParts = parts[1].split(" /by ");
 
-        if (descriptionParts.length < 2) {
+        if (descriptionParts.length < minNumberOfComponents) {
             throw new CydricException("You must specify a deadline using '/by', eg.'deadline do work /by 14th Feb'");
         }
 
@@ -152,7 +155,7 @@ class Cydric {
 
     // Helper method to handle event
     private static void handleEvent(String[] parts) throws CydricException {
-        if (parts.length < 2 || parts[1].trim().isEmpty()) {
+        if (parts.length < minNumberOfComponents || parts[1].trim().isEmpty()) {
             throw new CydricException("The description of a event cannot be empty!");
         }
 
@@ -165,8 +168,8 @@ class Cydric {
         }
 
         String taskDescription = description.substring(0, fromIndex).trim();
-        String startDate = description.substring(fromIndex + 6, toIndex).trim();
-        String endDate = description.substring(toIndex + 4).trim();
+        String startDate = description.substring(fromIndex + fromCommandLength, toIndex).trim();
+        String endDate = description.substring(toIndex + toCommandLength).trim();
 
         if (taskDescription.isEmpty() || startDate.isEmpty() || endDate.isEmpty()) {
             throw new CydricException("Event descriptions cannot be empty!");

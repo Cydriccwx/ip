@@ -4,7 +4,7 @@ public abstract class Task {
 
     public Task(String description) {
         this.description = description;
-        this.isDone = false; // Set default to not done
+        isDone = false; // Set default to not done
     }
 
     public String getStatusIcon() {
@@ -12,11 +12,11 @@ public abstract class Task {
     }
 
     public void markAsDone() {
-        this.isDone = true;
+        isDone = true;
     }
 
     public void markAsNotDone() {
-        this.isDone = false;
+        isDone = false;
     }
 
     @Override
