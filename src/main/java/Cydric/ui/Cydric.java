@@ -85,8 +85,8 @@ class Cydric {
     // Helper method to print introduction
     public static void printIntroduction() {
         printLine();
-        System.out.println("Hello! I'm the Cydric.UI.Cydric Bot");
-        System.out.println("To use the Cydric.UI.Cydric Bot, please key in commands: list/todo/deadline/event/mark/unmark");
+        System.out.println("Hello! I'm the Cydric Bot");
+        System.out.println("To use the Cydric Bot, please key in commands: list/todo/deadline/event/mark/unmark");
         System.out.println("eg. todo CS2113 Lecture\neg. deadline CS2113 Lecture /by Friday\neg. event CS2113 IP" +
                 " /from week 2 /to week 7");
         System.out.println("To use mark and unmark commands simply type out the command 'list' to view all active " +
