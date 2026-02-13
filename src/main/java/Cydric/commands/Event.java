@@ -1,4 +1,8 @@
-public class Event extends Task{
+package Cydric.commands;
+
+import Cydric.tasks.Task;
+
+public class Event extends Task {
     protected String eventStart;
     protected String eventEnd;
 
