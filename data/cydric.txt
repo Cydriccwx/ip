@@ -1,5 +1,5 @@
-T | 0 | qf1100
+T | 1 | qf1100
 T | 0 | trading
-T | 0 | stuff
+T | 1 | stuff
 D | 0 | return book | June 6th
-E | 0 | project meeting | Aug 6th 2pm | 4pm
+E | 1 | project meeting | Aug 6th 2pm | 4pm
