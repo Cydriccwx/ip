@@ -5,9 +5,15 @@ import Cydric.commands.Event;
 import Cydric.tasks.Task;
 import Cydric.commands.Todo;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
 class Cydric {
+    // OS-independent path: creates "data/cydric.txt" correctly on any system
+    private static final String FILE_PATH = Paths.get("data", "cydric.txt").toString();
 
     private static final int MAX_TASKS = 100;
     private static Task[] tasks = new Task[MAX_TASKS]; // List of max 100 tasks
@@ -16,7 +22,9 @@ class Cydric {
     private static int toCommandLength = 4; // Number to offset /to command for substring
     private static int minNumberOfComponents = 2; // Minimum number of components to execute commands
 
+
     public static void main(String[] args) {
+        loadTasks();
         printIntroduction();
         commandHandler();
     }
@@ -106,6 +114,7 @@ class Cydric {
         System.out.println("Got it. I've added this task:");
         System.out.println("  " + taskInput);
         System.out.println("Now you have " + taskCount + " tasks in the list.");
+        saveTasks();
     }
 
     // Helper method to handle mark
@@ -116,9 +125,10 @@ class Cydric {
         try {
             int index = Integer.parseInt(parts[1]) - 1;
             if (index < 0 || index >= taskCount) { // task number out of range
-                throw new CydricException("Error: Cydric.UI.Cydric.tasks.Task number " + parts[1] + " does not exist.");
+                throw new CydricException("Error: Task number " + parts[1] + " does not exist.");
             }
             tasks[index].markAsDone();
+            saveTasks();
             System.out.println("Nice! I've marked this task as done:");
             System.out.println(" " + tasks[index].toString());
         } catch (NumberFormatException e) {
@@ -134,9 +144,10 @@ class Cydric {
         try {
             int index = Integer.parseInt(parts[1]) - 1;
             if (index < 0 || index >= taskCount) {
-                throw new CydricException("Error: Cydric.UI.Cydric.tasks.Task number " + parts[1] + " does not exist.");
+                throw new CydricException("Error: Task number " + parts[1] + " does not exist.");
             }
             tasks[index].markAsNotDone();
+            saveTasks();
             System.out.println("Alright! I've marked this task as not done yet:");
             System.out.println(" " + tasks[index].toString());
         } catch (NumberFormatException e) {
@@ -178,8 +189,77 @@ class Cydric {
         String endDate = description.substring(toIndex + toCommandLength).trim();
 
         if (taskDescription.isEmpty() || startDate.isEmpty() || endDate.isEmpty()) {
-            throw new CydricException("Cydric.UI.Cydric.commands.Event descriptions cannot be empty!");
+            throw new CydricException("Event descriptions cannot be empty!");
         }
         addTask(new Event(taskDescription, startDate, endDate));
+    }
+
+    private static void saveTasks() {
+        try {
+            File file = new File(FILE_PATH);
+            if (!file.getParentFile().exists()) {
+                file.getParentFile().mkdirs(); // Creates the "data" folder if missing
+            }
+
+            FileWriter fw = new FileWriter(FILE_PATH);
+            // Only loop through the active tasks
+            for (int i = 0; i < taskCount; i++) {
+                fw.write(tasks[i].toFileFormat() + System.lineSeparator());
+            }
+            fw.close();
+        } catch (IOException e) {
+            System.out.println(" Error saving tasks to hard drive: " + e.getMessage());
+        }
+    }
+
+    private static void loadTasks() {
+        File file = new File(FILE_PATH);
+        if (!file.exists()) {
+            return; // File doesn't exist yet, just start fresh
+        }
+
+        try {
+            Scanner fileScanner = new Scanner(file);
+
+            // Loop while there are lines AND we haven't hit the 100 task limit
+            while (fileScanner.hasNext() && taskCount < MAX_TASKS) {
+                String line = fileScanner.nextLine();
+
+                try {
+                    String[] parts = line.split(" \\| ");
+                    String type = parts[0];
+                    boolean isDone = parts[1].equals("1");
+                    String desc = parts[2];
+
+                    Task t = null;
+                    switch (type) {
+                    case "T":
+                        t = new Todo(desc);
+                        break;
+                    case "D":
+                        t = new Deadline(desc, parts[3]);
+                        break;
+                    case "E":
+                        t = new Event(desc, parts[3], parts[4]);
+                        break;
+                    default:
+                        throw new Exception("Unknown task type");
+                    }
+
+                    if (isDone) {
+                        t.markAsDone();
+                    }
+
+                    // Add to fixed array and increment counter
+                    tasks[taskCount] = t;
+                    taskCount++;
+
+                } catch (Exception e) {
+                    System.out.println(" Warning: Skipping corrupted data line: " + line);
+                }
+            }
+        } catch (IOException e) {
+            System.out.println(" Error loading tasks: " + e.getMessage());
+        }
     }
 }
