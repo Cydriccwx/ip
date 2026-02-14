@@ -213,12 +213,14 @@ class Cydric {
         }
 
         Task removedTask = tasks.remove(taskIndex);
+        saveTasks();
 
         System.out.println("Alright! I have removed this task:");
         System.out.println("  " + removedTask);
         System.out.println("Now you have " + tasks.size() + " tasks in the list.");
     }
 
+    // Helper method to save previous chat log
     private static void saveTasks() {
         try {
             File file = new File(FILE_PATH);
@@ -237,6 +239,7 @@ class Cydric {
         }
     }
 
+    // Helper method to load previous chat log
     private static void loadTasks() {
         File file = new File(FILE_PATH);
         if (!file.exists()) {
