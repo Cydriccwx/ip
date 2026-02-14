@@ -92,8 +92,8 @@ class Cydric {
         System.out.println("To use the Cydric Bot, please key in commands: list/todo/deadline/event/mark/unmark/delete");
         System.out.println("eg. todo CS2113 Lecture\neg. deadline CS2113 Lecture /by Friday\neg. event CS2113 IP" +
                 " /from week 2 /to week 7");
-        System.out.println("To use mark and unmark commands simply type out the command 'list' to view all active " +
-                "tasks, then mark/unmark any task you wish to! eg. mark 1 / unmark 1");
+        System.out.println("To use mark/unmark/delete commands simply type out the command 'list' to view all active " +
+                "tasks, then mark/unmark/delete any task you wish to! eg. mark 1 / delete 1");
         printLine();
     }
 
