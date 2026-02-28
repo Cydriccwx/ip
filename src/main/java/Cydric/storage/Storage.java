@@ -1,9 +1,9 @@
 package Cydric.storage;
 
 import Cydric.tasks.Task;
-import Cydric.commands.Todo;
-import Cydric.commands.Deadline;
-import Cydric.commands.Event;
+import Cydric.tasks.Todo;
+import Cydric.tasks.Deadline;
+import Cydric.tasks.Event;
 
 import java.io.File;
 import java.io.FileWriter;
