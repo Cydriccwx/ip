@@ -1,6 +1,4 @@
-package Cydric.commands;
-
-import Cydric.tasks.Task;
+package Cydric.tasks;
 
 public class Deadline extends Task {
     protected String by;
