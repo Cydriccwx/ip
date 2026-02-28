@@ -1,18 +1,9 @@
 package Cydric.ui;
 
 import Cydric.storage.Storage;
-import Cydric.tasks.Deadline;
-import Cydric.tasks.Event;
-import Cydric.tasks.Task;
-import Cydric.tasks.Todo;
 import Cydric.ui.command.Command;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.nio.file.Paths;
-import java.util.Scanner;
-import java.util.ArrayList;
 
 public class Cydric {
     private Storage storage;
