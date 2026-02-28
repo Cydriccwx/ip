@@ -1,6 +1,9 @@
-package Cydric.command;
+package Cydric.ui.command;
 
+import Cydric.storage.Storage;
 import Cydric.tasks.Task;
+import Cydric.ui.TaskList;
+import Cydric.ui.Ui;
 
 public class AddCommand extends Command {
     private Task taskToAdd;
