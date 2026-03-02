@@ -71,6 +71,12 @@ public class Parser {
             }
             return new DeleteCommand(Integer.parseInt(parts[1]) - 1);
 
+        case "find":
+            if (parts.length < minNumberOfComponents || parts[1].trim().isEmpty()) {
+                throw new CydricException("Please enter a keyword to search for!");
+            }
+            return new FindCommand(parts[1].trim());
+
         default:
             throw new CydricException("I have no idea what ur talking about \uD83D\uDDFF \nPlease use the given commands only :/");
         }
