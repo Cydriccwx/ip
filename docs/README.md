@@ -2,20 +2,6 @@
 
 **Cydric** is a desktop application for managing tasks, optimised for use via a Command Line Interface (CLI). If you can type fast, Cydric can manage your daily tasks, deadlines, and events faster than traditional GUI apps.
 
-## Adding deadlines
-
-// Describe the action and its outcome.
-
-// Give examples of usage
-
-Example: `keyword (optional arguments)`
-
-// A description of the expected outcome goes here
-
-```
-expected output
-```
-
 ## Quick Start
 1. Ensure you have Java `11` or above installed in your Computer.
 2. Download the latest `Cydric.jar` from the releases page.
