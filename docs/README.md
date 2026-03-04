@@ -4,9 +4,9 @@
 
 ## Quick Start
 1. Ensure you have Java `11` or above installed in your Computer.
-2. Download the latest `Cydric.jar` from the releases page.
+2. Download the latest `Individual.Project.jar` from the releases page.
 3. Copy the file to the folder you want to use as the home folder for your task list.
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar Cydric.jar` command to run the application.
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar Individual.Project.jar` command to run the application.
 5. Type the command in the command box and press Enter to execute it.
 
 ---
@@ -46,6 +46,7 @@ Got it. I've added this task:
 ### 4. Listing all tasks: `list`
 Shows a numbered list of all the tasks you have currently tracked.
 * **Format:** `list`
+
 ```
 Here are the tasks in your list:
   1. [T][ ] read CS2113 textbook
