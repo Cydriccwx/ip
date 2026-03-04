@@ -5,11 +5,22 @@ import Cydric.tasks.Event;
 import Cydric.tasks.Todo;
 import Cydric.ui.command.*;
 
+
+/**
+ * Translates user text input into actionable Command objects
+ */
 public class Parser {
     private static int fromCommandLength = 6; // Number to offset /from command for substring
     private static int toCommandLength = 4; // Number to offset /to command for substring
     private static int minNumberOfComponents = 2; // Minimum number of components to execute commands
 
+    /**
+     * Parses the raw string input from the user and returns the corresponding Command.
+     *
+     * @param fullCommand The complete, raw string typed by the user in the CLI.
+     * @return A Command object representing the action the user wants to take.
+     * @throws CydricException If the command is unknown, formatted incorrectly, or missing required parameters.
+     */
     public static Command parse(String fullCommand) throws CydricException {
         // Split command from the rest of the sentence
         String[] parts = fullCommand.split(" ", 2);
